@@ -79,3 +79,33 @@ func (c *HeadHunterAuthClient) GetClientCredentialsToken(clientID, clientSecret 
 
 	return &tokenResp, nil
 }
+
+// RevokeToken invalidates an access token
+func (c *HeadHunterAuthClient) RevokeToken(accessToken string) error {
+	// Create request for token revocation
+	req, err := http.NewRequest("DELETE", HHTokenEndpoint, nil)
+	if err != nil {
+		return fmt.Errorf("error creating revocation request: %w", err)
+	}
+
+	// Add authorization header
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", accessToken))
+
+	// Send request
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return fmt.Errorf("error sending revocation request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	// Check response status
+	if resp.StatusCode != http.StatusNoContent && resp.StatusCode != http.StatusOK {
+		var errResp ErrorResponse
+		if err := json.NewDecoder(resp.Body).Decode(&errResp); err != nil {
+			return fmt.Errorf("error during token revocation, status: %d", resp.StatusCode)
+		}
+		return fmt.Errorf("API error: %s - %s", errResp.Error, errResp.ErrorDescription)
+	}
+
+	return nil
+}

@@ -2,12 +2,16 @@
 
 Этот проект содержит инструменты для работы с API HeadHunter через MCP (Model Context Protocol).
 
+## API Документация
+
+Документация API HeadHunter доступна в формате OpenAPI в файле [openapi.yml](./openapi.yml).
+
 ## Планируемые tools MCP (TODO)
 
 ### Авторизация
 
 - [X] `POST /oauth/token` — Получение access-токена (авторизация)
-- [ ] `DELETE /oauth/token` — Инвалидация токена
+- [X] `DELETE /oauth/token` — Инвалидация токена
 
 ### Резюме
 

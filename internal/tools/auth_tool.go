@@ -25,7 +25,15 @@ func NewAuthTool() *AuthTool {
 // GetToolDefinition возвращает определение инструмента MCP
 func (t *AuthTool) GetToolDefinition() mcp.Tool {
 	return mcp.NewTool("authorize",
-		mcp.WithDescription("Авторизация в API HeadHunter используя учетные данные клиента"),
+		mcp.WithDescription(`Авторизация в API HeadHunter используя учетные данные клиента (client_credentials).
+
+OAuth2 Authorization Information (EN):
+- This tool uses client_credentials grant type to obtain an application token
+- Application tokens include only access_token and token_type (no refresh_token)
+- When the application token expires, you need to request a new one using this tool
+- According to HeadHunter API documentation, application tokens cannot be invalidated through the /oauth/token DELETE method
+- This is different from user-based tokens which would include a refresh_token
+`),
 		mcp.WithString("client_id",
 			mcp.Required(),
 			mcp.Description("Client ID полученный из HeadHunter API"),
