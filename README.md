@@ -1,12 +1,12 @@
 # HeadHunter API Tools
 
-Этот проект содержит инструменты для работы с API HeadHunter через MCP (Mission Control Platform).
+Этот проект содержит инструменты для работы с API HeadHunter через MCP (Model Context Protocol).
 
 ## Планируемые tools MCP (TODO)
 
 ### Авторизация
 
-- [ ] `POST /oauth/token` — Получение access-токена (авторизация)
+- [X] `POST /oauth/token` — Получение access-токена (авторизация)
 - [ ] `DELETE /oauth/token` — Инвалидация токена
 
 ### Резюме
