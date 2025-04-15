@@ -14,6 +14,10 @@ func RegisterTools(s *server.MCPServer) {
 	deauthTool := NewDeauthorizeTool()
 	s.AddTool(deauthTool.GetToolDefinition(), deauthTool.HandleRequest)
 
+	// Регистрация инструмента получения информации о пользователе
+	userInfoTool := NewUserInfoTool()
+	s.AddTool(userInfoTool.GetToolDefinition(), userInfoTool.HandleRequest)
+
 	// Здесь будут регистрироваться другие инструменты
 	// ...
 }
